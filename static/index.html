@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#182230">
+  <title>Mouth Gym</title>
+  <link rel="stylesheet" href="/static/styles.css?v=20260911-2">
+</head>
+<body>
+  <header class="topbar">
+    <button class="brand" data-view="home">
+      <span class="brand-mark">🎤</span>
+      <span>Mouth Gym</span>
+    </button>
+    <nav class="tabs">
+      <button class="tab-btn active" data-view="home">首页</button>
+      <button class="tab-btn" data-view="bank">即兴题库</button>
+      <button class="tab-btn" data-view="library">资料库</button>
+      <button class="tab-btn" data-view="history">历史</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="view-home" class="view active">
+      <div id="home-start">
+        <div class="hero">
+          <span class="eyebrow">Mouth Gym</span>
+          <h1>说得清楚，比说得更多更重要</h1>
+          <p>从即兴临场到深度讲解，用一次次真实表达训练你的逻辑、节奏和清晰度。</p>
+          <div class="hero-badges">
+            <span class="hero-badge">浏览器录音</span>
+            <span class="hero-badge">1-3 分钟表达</span>
+            <span class="hero-badge">逐步复盘</span>
+          </div>
+        </div>
+
+        <div id="resume-card" class="card resume-card hidden"></div>
+
+        <div class="home-mode-heading">
+          <div>
+            <span class="eyebrow">Start training</span>
+            <h2>选择今天的训练方式</h2>
+          </div>
+          <p>想锻炼临场反应就选即兴，想把一个原理真正讲明白就选深度研究。</p>
+        </div>
+
+        <div class="mode-grid">
+          <article class="mode-card improv">
+            <div class="mode-topline"><span class="mode-step">MODE 01</span><span class="mode-icon">⚡</span></div>
+            <h2>即兴发挥</h2>
+            <p>随机处理临时场合、描述物品或向别人介绍产品。</p>
+            <div class="mode-meta">30 秒准备 · 1-3 分钟表达</div>
+            <button id="improv-mode-btn" class="primary">开始即兴</button>
+          </article>
+          <article class="mode-card research">
+            <div class="mode-topline"><span class="mode-step">MODE 02</span><span class="mode-icon">🔎</span></div>
+            <h2>深度研究</h2>
+            <p>随机抽题或用自定义主题，研究 10 分钟后脱稿讲清楚。</p>
+            <div class="mode-meta">10 分钟研究 · 1-3 分钟表达</div>
+            <button id="research-mode-btn" class="primary">开始研究</button>
+          </article>
+        </div>
+
+        <div id="mode-setup" class="card hidden"></div>
+      </div>
+      <div id="session-panel" class="hidden"></div>
+    </section>
+
+    <section id="view-bank" class="view">
+      <div class="card">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">随机出题池</span>
+            <h2>即兴题库</h2>
+          </div>
+          <p class="hint">练习时会从全部启用题目中随机抽取，不提供换题。</p>
+        </div>
+        <div id="bank-categories" class="chips"></div>
+        <div class="bank-toolbar">
+          <div id="bank-stats" class="bank-stats"></div>
+          <input id="bank-search-input" type="search" placeholder="搜索题目或分类…">
+        </div>
+        <div class="row section-row">
+          <input id="new-category-input" placeholder="新分类名称">
+          <button id="add-category-btn">添加分类</button>
+        </div>
+        <div class="row section-row">
+          <select id="bank-category-filter"><option value="">全部分类</option></select>
+        </div>
+        <div id="question-list" class="list"></div>
+        <div class="row add-question">
+          <textarea id="new-question-input" placeholder="输入新的即兴题目"></textarea>
+          <select id="new-question-category"></select>
+          <button id="add-question-btn" class="primary">添加题目</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-library" class="view">
+      <div class="card">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">深度研究素材</span>
+            <h2>本地资料库</h2>
+          </div>
+          <button id="new-library-item-btn" class="primary">新增资料</button>
+        </div>
+        <div id="library-categories" class="chips"></div>
+        <div class="row section-row">
+          <input id="new-library-category-input" placeholder="新资料分类">
+          <button id="add-library-category-btn">添加分类</button>
+        </div>
+        <div class="row section-row">
+          <select id="library-category-filter"><option value="">全部分类</option></select>
+        </div>
+        <div id="library-list" class="list"></div>
+      </div>
+
+      <div id="library-editor" class="card hidden">
+        <div class="section-heading">
+          <h2 id="library-editor-title">新增资料</h2>
+          <button id="cancel-library-edit-btn">取消</button>
+        </div>
+        <div class="form-grid">
+          <label class="field"><span>标题</span><input id="library-title"></label>
+          <label class="field"><span>分类</span><select id="library-category"></select></label>
+          <label class="field full"><span>摘要</span><input id="library-summary" placeholder="一句话概括"></label>
+          <label class="field full"><span>正文</span><textarea id="library-content" placeholder="现象、原理、例子、口述提示…"></textarea></label>
+          <label class="field full"><span>来源链接（可选）</span><input id="library-source-url" type="url" placeholder="https://"></label>
+        </div>
+        <button id="save-library-item-btn" class="primary">保存资料</button>
+        <div id="library-editor-status" class="status"></div>
+      </div>
+    </section>
+
+    <section id="view-history" class="view">
+      <div class="card">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">本地记录</span>
+            <h2>练习历史</h2>
+          </div>
+        </div>
+        <div id="history-list" class="list"></div>
+      </div>
+      <div id="history-detail" class="card hidden"></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="/static/app.js?v=20260911-2"></script>
+</body>
+</html>
